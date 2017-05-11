@@ -33,6 +33,17 @@
       <% if current_user %>
         <%= form_for [@product, @review] do |form| %>
 
+          <% if form.object.errors.any? %>
+            <div class="alert alert-danger">
+              <strong>The following errors prevented posting:</strong>
+              <ul>
+                <% form.object.errors.full_messages.each do |error| %>
+                  <li><%= error %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
           <div class="col-sm-2">
             <div class="form-group">
               <%= form.label :rating %>
