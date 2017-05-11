@@ -15,4 +15,13 @@ class Product < ActiveRecord::Base
     self.quantity == 0
   end
 
+  def rating
+    rating = self.reviews.average(:rating)
+    if rating
+      round = (rating * 2).round.to_f / 2
+    else
+      rating
+    end
+  end
+
 end

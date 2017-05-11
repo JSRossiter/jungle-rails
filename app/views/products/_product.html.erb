@@ -5,6 +5,11 @@
       <h4><%= product.name %></h4>
     <% end %>
   </header>
+  <% if product.rating %>
+    <span>
+      <em>Rating: </em><%= raw((fa_icon "star") * product.rating.to_i) %><%= fa_icon "star-half" unless product.rating % 1 == 0 %>
+    </span>
+  <% end %>
   <p class="description">
     <%= product.description %>
   </p>
