@@ -1,17 +1,23 @@
 <% if review.rating %>
-  <dl class="dl-horizontal review">
-    <dt>Review by</dt>
-    <dd><%= review.user.first_name %></dd>
-    <dt>Rating</dt>
-    <dd><%= review.rating %></dd>
-    <% if review.description != '' %>
-      <dt>Description</dt>
-      <dd><%= review.description %></dd>
+  <div class="col-sm-1">
+    <% if current_user == review.user %>
+      <%= form_tag(product_review_url(@product, review), method: "delete") do %>
+        <%= button_tag "Delete", data: { confirm: "Are you sure?" }, class: 'btn btn-sm btn-danger' %>
+      <% end %>
     <% end %>
-  </dl>
-  <% if current_user = review.user %>
-    <%= form_tag(product_review_url(@product, review), method: "delete") do %>
-      <%= button_tag "Delete", data: { confirm: "Are you sure?" }, class: 'btn btn-sm btn-danger' %>
-    <% end %>
-  <% end %>
+  </div>
+
+  <div class="col-sm-11">
+    <dl class="dl-horizontal review">
+      <dt>Review by</dt>
+      <dd><%= review.user.first_name %></dd>
+      <dt>Rating</dt>
+      <dd><%= raw((fa_icon "star") * review.rating.to_i) %></dd>
+      <% if review.description != '' %>
+        <dt>Description</dt>
+        <dd><%= review.description %></dd>
+      <% end %>
+    </dl>
+  </div>
+
 <% end %>

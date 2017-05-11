@@ -29,28 +29,32 @@
     <div class="row">
       <h3>Reviews</h3>
 
-      <div class="col-sm-6 col-sm-offset-1">
 
-        <% if current_user %>
-          <%= form_for [@product, @new_review] do |form| %>
+      <% if current_user %>
+        <%= form_for [@product, @review] do |form| %>
 
-
+          <div class="col-sm-2">
             <div class="form-group">
               <%= form.label :rating %>
               <%= form.select(:rating, options_for_select(1..5), { include_blank: true }, class: 'form-control') %>
             </div>
+          </div>
 
+          <div class="col-sm-8">
             <div class="form-group">
               <%= form.label :description %>
-              <%= form.text_area :description, class: 'form-control' %>
+              <%= form.text_area :description, class: 'form-control', placeholder: 'Tell us what you thought' %>
             </div>
-
-            <%= form.submit 'Post Review', class: 'btn btn-primary' %>
-          <% end %>
+          </div>
+          <div class="col-sm-2">
+          <br>
+          <%= form.submit 'Post Review', class: 'btn btn-primary' %>
+          </div>
         <% end %>
+      <% end %>
 
+      <div class="col-sm-9">
         <br>
-
         <%= render @product.reviews.order(created_at: :desc) %>
 
       </div>
