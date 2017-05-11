@@ -1,8 +1,17 @@
-<dl class="dl-horizontal review">
-  <dt>Review by</dt>
-  <dd><%= review.user.first_name %></dd>
-  <dt>Rating</dt>
-  <dd><%= review.rating %></dd>
-  <dt>Description</dt>
-  <dd><%= review.description %></dd>
-</dl>
+<% if review.rating %>
+  <dl class="dl-horizontal review">
+    <dt>Review by</dt>
+    <dd><%= review.user.first_name %></dd>
+    <dt>Rating</dt>
+    <dd><%= review.rating %></dd>
+    <% if review.description != '' %>
+      <dt>Description</dt>
+      <dd><%= review.description %></dd>
+    <% end %>
+  </dl>
+  <% if current_user = review.user %>
+    <%= form_tag(product_review_url(@product, review), method: "delete") do %>
+      <%= button_tag "Delete", data: { confirm: "Are you sure?" }, class: 'btn btn-sm btn-danger' %>
+    <% end %>
+  <% end %>
+<% end %>
