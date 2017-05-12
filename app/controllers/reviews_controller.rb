@@ -8,7 +8,6 @@ class ReviewsController < ApplicationController
     @review = @product.reviews.build(review_params)
     @review.user = current_user
 
-
     if @review.save
       redirect_to @product
     else
@@ -18,13 +17,10 @@ class ReviewsController < ApplicationController
 
   def destroy
     review = Review.find params[:id]
-    @product = Product.find params[:product_id]
     if current_user = review.user
       review.destroy
-      redirect_to @product
-    else
-      redirect_to @product
     end
+    redirect_to review.product
   end
 
   private

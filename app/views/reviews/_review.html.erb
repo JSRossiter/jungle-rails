@@ -1,7 +1,7 @@
 <% if review.rating %>
   <div class="col-sm-1">
     <% if current_user == review.user %>
-      <%= form_tag(product_review_url(@product, review), method: "delete") do %>
+      <%= form_tag(review_url(review), method: "delete") do %>
         <%= button_tag "Delete", data: { confirm: "Are you sure?" }, class: 'btn btn-sm btn-danger' %>
       <% end %>
     <% end %>
