@@ -50,12 +50,12 @@ RSpec.describe User, type: :model do
 
   describe '.authenticate_with_credentials' do
     before :each do
-      User.create(first_name: 'a', last_name: 'a', email: '1@1.com', password: 'test_password', password_confirmation: 'test_password')
+      @user = User.create(first_name: 'a', last_name: 'a', email: '1@1.com', password: 'test_password', password_confirmation: 'test_password')
     end
 
     it 'should return user when provided correct credentials' do
       user = User.authenticate_with_credentials('1@1.com', 'test_password')
-      expect(user).to eql(User.find_by_email('1@1.com'))
+      expect(user).to eql(@user)
     end
     it 'should return false when provided incorrect password' do
       user = User.authenticate_with_credentials('1@1.com', 'not_test_password')
@@ -67,15 +67,15 @@ RSpec.describe User, type: :model do
     end
     it 'should return user when provided email with different case characters' do
       user = User.authenticate_with_credentials('1@1.COM', 'test_password')
-      expect(user).to eql(User.find_by_email('1@1.com'))
+      expect(user).to eql(@user)
     end
     it 'should return user when provided email with white space after' do
       user = User.authenticate_with_credentials('1@1.com ', 'test_password')
-      expect(user).to eql(User.find_by_email('1@1.com'))
+      expect(user).to eql(@user)
     end
     it 'should return user when provided with white space before' do
       user = User.authenticate_with_credentials(' 1@1.com', 'test_password')
-      expect(user).to eql(User.find_by_email('1@1.com'))
+      expect(user).to eql(@user)
     end
   end
 
