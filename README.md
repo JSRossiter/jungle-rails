@@ -2,6 +2,8 @@
 
 A mini e-commerce application built with Rails 4.2 for purposes of teaching Rails by example.
 
+Deployed at https://mysterious-river-50511.herokuapp.com/
+
 ## Setup
 
 1. Run `bundle install` to install dependencies
