@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "ProductDetails", type: :feature, js: true do
+RSpec.feature "AddToCarts", type: :feature, js: true do
 
   before :each do
     @category = Category.create! name: 'Apparel'
@@ -16,15 +16,15 @@ RSpec.feature "ProductDetails", type: :feature, js: true do
     end
   end
 
-  scenario "Display product details after clicking on details" do
+  scenario "Cart count updates when item is added" do
     # ACT
     visit root_path
     Capybara.match = :prefer_exact
-    click_on 'Details'
+    click_on 'Add'
 
     # DEBUG / VERIFY
 
-    expect(page).to have_css 'article.product-detail'
+    expect(page).to have_content 'My Cart (1)'
 
   end
 
